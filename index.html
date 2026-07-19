@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BipBooks — বিপবুকস | বাংলার ডিজিটাল ম্যাগাজিন</title>
+  <meta name="description" content="বিপবুকস — ইন্ডিয়ার প্রথম ডিজিটাল ই-পেপার ম্যাগাজিন। প্রতি সপ্তাহে নতুন সংখ্যা পড়ুন, বই সংগ্রহ করুন।" />
+  <meta name="theme-color" content="#010008" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/epaper.css" />
+</head>
+<body>
+  <!-- Particle Background -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- ─── FLOATING NAVBAR ──────────────────────────────── -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <a class="nav-logo" href="#home" aria-label="BipBooks Home">
+      <div class="nav-logo-icon">বি</div>
+      <span class="nav-logo-text">BipBooks</span>
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#home"           class="active" id="nav-home">হোম</a></li>
+      <li><a href="#epaper-section"             id="nav-epaper">ই-পেপার</a></li>
+      <li><a href="#our-books"      id="nav-books">আমাদের বই</a></li>
+      <li><a href="#editorial-desks" id="nav-editorial">সম্পাদকীয়</a></li>
+      <li><a href="#announcements"  id="nav-announce">ঘোষণা</a></li>
+      <li><a href="#blogs"          id="nav-blogs">ব্লগ</a></li>
+      <li><a href="#about"          id="nav-about">আমাদের সম্পর্কে</a></li>
+      <li><a href="#contact"        id="nav-contact">যোগাযোগ</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <div class="nav-clock" id="nav-clock" aria-live="polite">
+        <span class="clock-time" id="clock-time">00:00:00</span>
+        <span class="clock-date" id="clock-date">Jan 01, 2026</span>
+      </div>
+      <a href="#epaper-section" class="btn-epaper" id="btn-read-epaper">📰 ই-পেপার পড়ুন</a>
+    </div>
+
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="nav-mobile" id="nav-mobile" role="dialog" aria-label="Mobile navigation">
+    <a href="#home"            id="mnav-home">🏠 হোম</a>
+    <a href="#epaper-section"              id="mnav-epaper">📰 ই-পেপার</a>
+    <a href="#our-books"       id="mnav-books">📚 আমাদের বই</a>
+    <a href="#editorial-desks" id="mnav-editorial">✍️ সম্পাদকীয়</a>
+    <a href="#announcements"   id="mnav-announce">📢 ঘোষণা ও ইভেন্ট</a>
+    <a href="#blogs"           id="mnav-blogs">📝 ব্লগ</a>
+    <a href="#about"           id="mnav-about">ℹ️ আমাদের সম্পর্কে</a>
+    <a href="#contact"         id="mnav-contact">📞 যোগাযোগ</a>
+  </div>
+
+  <!-- ─── TICKER BAR ───────────────────────────────────── -->
+  <div class="ticker-bar" id="ticker-bar" aria-label="Breaking news ticker">
+    <div class="ticker-label">সর্বশেষ</div>
+    <div class="ticker-track" id="ticker-track">
+      <span class="ticker-item"><span>📖</span> বিপবুকস-এর নতুন সাপ্তাহিক সংখ্যা এখন পড়ুন</span>
+      <span class="ticker-item"><span>🏆</span> সেরা লেখকদের রচনা নিয়ে বিশেষ সংখ্যা প্রকাশিত হলো</span>
+      <span class="ticker-item"><span>📚</span> নতুন বই সংযোজন — এই সপ্তাহে ৫টি নতুন বই</span>
+      <span class="ticker-item"><span>🎭</span> সাংস্কৃতিক উৎসব ২০২৬ — নিবন্ধন চলছে</span>
+      <span class="ticker-item"><span>✍️</span> লেখা পাঠান — সেরা লেখা প্রকাশিত হবে</span>
+      <span class="ticker-item"><span>🌟</span> পাঠক পুরস্কার ২০২৬ — মনোনয়ন গ্রহণ শুরু</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="ticker-item"><span>📖</span> বিপবুকস-এর নতুন সাপ্তাহিক সংখ্যা এখন পড়ুন</span>
+      <span class="ticker-item"><span>🏆</span> সেরা লেখকদের রচনা নিয়ে বিশেষ সংখ্যা প্রকাশিত হলো</span>
+      <span class="ticker-item"><span>📚</span> নতুন বই সংযোজন — এই সপ্তাহে ৫টি নতুন বই</span>
+      <span class="ticker-item"><span>🎭</span> সাংস্কৃতিক উৎসব ২০২৬ — নিবন্ধন চলছে</span>
+      <span class="ticker-item"><span>✍️</span> লেখা পাঠান — সেরা লেখা প্রকাশিত হবে</span>
+      <span class="ticker-item"><span>🌟</span> পাঠক পুরস্কার ২০২৬ — মনোনয়ন গ্রহণ শুরু</span>
+    </div>
+  </div>
+
+  <div class="page-wrapper">
+
+    <!-- ═══════════════════════════════════════════════════
+         HOME / HERO SECTION
+    ═══════════════════════════════════════════════════ -->
+    <section id="home" aria-label="Hero section">
+      <div class="hero-glow-orb orb-1"></div>
+      <div class="hero-glow-orb orb-2"></div>
+      <div class="hero-glow-orb orb-3"></div>
+
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          প্রতি সপ্তাহে নতুন সংখ্যা
+        </div>
+
+        <h1 class="hero-title">
+          বাংলার প্রথম<br>
+          <span class="glow-gold">ডিজিটাল ম্যাগাজিন</span><br>
+          <span class="glow-cyan">প্ল্যাটফর্ম</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          সাহিত্য, বিনোদন, রাজনীতি, খেলাধুলা — সব একসাথে।<br>
+          প্রতি সপ্তাহে নতুন ই-পেপার, বই এবং ব্লগ পোস্ট।
+        </p>
+
+        <div class="hero-actions">
+          <a href="#epaper-section" class="btn-primary" id="hero-read-btn">📰 এই সপ্তাহের ম্যাগাজিন পড়ুন</a>
+          <a href="#our-books" class="btn-secondary" id="hero-books-btn">📚 বই সংগ্রহ দেখুন</a>
+        </div>
+
+        <div class="hero-stats" role="region" aria-label="Statistics">
+          <div class="stat-item">
+            <span class="stat-num" id="stat-issues">৫০+</span>
+            <span class="stat-label">সাপ্তাহিক সংখ্যা</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" id="stat-books">১২০+</span>
+            <span class="stat-label">বই সংগ্রহ</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num" id="stat-readers">১০,০০০+</span>
+            <span class="stat-label">পাঠক</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">৭ দিন</span>
+            <span class="stat-label">প্রতি সপ্তাহে আপডেট</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- ═══════════════════════════════════════════════════
+         ePAPER / MAGAZINE SECTION
+    ═══════════════════════════════════════════════════ -->
+    <section id="epaper-section" class="section" aria-label="ePaper magazine reader">
+      <div class="section-inner">
+
+        <div class="section-header reveal">
+          <span class="section-tag tag-gold">সাপ্তাহিক ই-পেপার</span>
+          <h2 class="section-title">এই সপ্তাহের <span style="background:linear-gradient(90deg,var(--neon-gold),var(--neon-orange));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">ম্যাগাজিন</span></h2>
+          <div class="glow-divider divider-gold"></div>
+        </div>
+
+        <!-- Header row: publish info + countdown -->
+        <div class="epaper-header-row reveal">
+          <div class="epaper-publish-info">
+            <div class="publish-badge" id="publish-badge">
+              <span class="live-dot"></span>
+              <span id="publish-status-text">লাইভ পাবলিশড</span>
+            </div>
+            <div class="publish-date-text" id="publish-date-text">
+              প্রকাশিত: <span id="pub-date-val">--</span>
+            </div>
+          </div>
+          <div class="epaper-countdown" id="epaper-countdown-wrap">
+            <span class="countdown-label">মেয়াদ শেষ হবে:</span>
+            <div class="countdown-timer">
+              <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-lbl">দিন</span></div>
+              <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><span class="cd-lbl">ঘন্টা</span></div>
+              <div class="cd-unit"><span class="cd-num" id="cd-mins">--</span><span class="cd-lbl">মিনিট</span></div>
+              <div class="cd-unit"><span class="cd-num" id="cd-secs">--</span><span class="cd-lbl">সেকেন্ড</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Slider -->
+        <div class="category-slider-wrap reveal">
+          <div class="category-slider" id="category-slider" role="tablist" aria-label="Magazine sections">
+            <button class="cat-btn active" data-page="1" role="tab" aria-selected="true" id="cat-all">সব পাতা</button>
+            <button class="cat-btn" data-page="1" role="tab" id="cat-binodon">বিনোদন</button>
+            <button class="cat-btn" data-page="2" role="tab" id="cat-khela">খেলাধুলা</button>
+            <button class="cat-btn" data-page="3" role="tab" id="cat-rajniti">রাজনীতি</button>
+            <button class="cat-btn" data-page="4" role="tab" id="cat-sahitya">সাহিত্য</button>
+            <button class="cat-btn" data-page="5" role="tab" id="cat-bijnan">বিজ্ঞান</button>
+            <button class="cat-btn" data-page="6" role="tab" id="cat-artho">অর্থনীতি</button>
+            <button class="cat-btn" data-page="7" role="tab" id="cat-shasthya">স্বাস্থ্য</button>
+            <button class="cat-btn" data-page="8" role="tab" id="cat-bhromon">ভ্রমণ</button>
+          </div>
+        </div>
+
+        <!-- ePaper Viewer -->
+        <div class="epaper-viewer-wrap reveal" id="epaper-viewer-wrap">
+          <!-- Progress bar -->
+          <div class="ep-progress-bar"><div class="ep-progress-fill" id="ep-progress"></div></div>
+
+          <!-- Toolbar -->
+          <div class="epaper-toolbar">
+            <div class="epaper-page-info">
+              পৃষ্ঠা <span id="ep-current-page">১</span> / <span id="ep-total-pages">—</span>
+            </div>
+            <div class="epaper-controls">
+              <button class="ep-btn" id="ep-btn-prev" title="আগের পৃষ্ঠা (বাম ক্লিক)">◀</button>
+              <div class="ep-zoom">
+                <button class="ep-btn" id="ep-btn-zoom-out" title="ছোট করুন">−</button>
+                <span class="ep-zoom-value" id="ep-zoom-val">100%</span>
+                <button class="ep-btn" id="ep-btn-zoom-in" title="বড় করুন">+</button>
+              </div>
+              <button class="ep-btn" id="ep-btn-next" title="পরের পৃষ্ঠা (ডান ক্লিক)">▶</button>
+              <button class="ep-btn" id="ep-btn-fullscreen" title="পূর্ণ পর্দা">⛶</button>
+              <button class="ep-btn" id="ep-btn-help" title="সাহায্য">?</button>
+            </div>
+          </div>
+
+          <!-- Keyboard shortcuts help panel -->
+          <div class="ep-shortcuts-hint" id="ep-shortcuts-hint">
+            <div class="shortcut-row"><span>বাম ক্লিক</span><span class="shortcut-key">← আগের পৃষ্ঠা</span></div>
+            <div class="shortcut-row"><span>ডান ক্লিক</span><span class="shortcut-key">→ পরের পৃষ্ঠা</span></div>
+            <div class="shortcut-row"><span>কীবোর্ড</span><span class="shortcut-key">← →</span></div>
+            <div class="shortcut-row"><span>পূর্ণ পর্দা</span><span class="shortcut-key">F</span></div>
+          </div>
+
+          <!-- Canvas area -->
+          <div class="epaper-canvas-area" id="epaper-canvas-area" role="img" aria-label="Magazine page viewer">
+
+            <!-- Loading state -->
+            <div class="epaper-loading" id="epaper-loading">
+              <div class="loader-ring"></div>
+              <p style="color:var(--text-muted);font-size:0.9rem;">ম্যাগাজিন লোড হচ্ছে...</p>
+            </div>
+
+            <!-- Main canvas (hidden until PDF loads) -->
+            <canvas id="epaper-canvas" style="display:none;" aria-label="Magazine page content"></canvas>
+
+            <!-- Click overlay for left/right navigation -->
+            <div class="ep-click-overlay" id="ep-click-overlay" style="display:none;">
+              <div class="ep-click-half left" id="ep-left-zone" title="আগের পৃষ্ঠা">‹</div>
+              <div class="ep-click-half right" id="ep-right-zone" title="পরের পৃষ্ঠা">›</div>
+            </div>
+
+            <!-- Coming Soon state -->
+            <div class="epaper-coming-soon" id="epaper-coming-soon" style="display:none;">
+              <div class="coming-soon-icon">📅</div>
+              <h3 class="coming-soon-title">আসছে পরের সংখ্যা!</h3>
+              <p class="coming-soon-sub">এই সপ্তাহের ম্যাগাজিনের মেয়াদ শেষ হয়েছে।<br>পরের সংখ্যা খুব শীঘ্রই আসছে!</p>
+              <div class="next-issue-countdown" id="next-issue-cd">
+                <div class="ncd-unit"><span class="ncd-num" id="ni-days">00</span><span class="ncd-lbl">দিন</span></div>
+                <span class="ncd-sep">:</span>
+                <div class="ncd-unit"><span class="ncd-num" id="ni-hours">00</span><span class="ncd-lbl">ঘন্টা</span></div>
+                <span class="ncd-sep">:</span>
+                <div class="ncd-unit"><span class="ncd-num" id="ni-mins">00</span><span class="ncd-lbl">মিনিট</span></div>
+              </div>
+              <a href="#" class="btn-primary" style="margin-top:16px;" id="notify-btn" onclick="showToast('🔔 আপনাকে জানানো হবে যখন নতুন সংখ্যা আসবে!','#00e676'); return false;">🔔 নতুন সংখ্যার জন্য নোটিফিকেশন পান</a>
+            </div>
+
+            <!-- No PDF uploaded -->
+            <div class="no-pdf-msg" id="no-pdf-msg">
+              <div style="font-size:4rem;margin-bottom:12px;">📰</div>
+              <p style="font-size:1rem;font-weight:600;color:var(--text-secondary);margin-bottom:8px;">এখনো কোনো ম্যাগাজিন আপলোড হয়নি</p>
+              <p style="font-size:0.82rem;">Admin প্যানেল থেকে নতুন ম্যাগাজিন আপলোড করুন।</p>
+            </div>
+          </div>
+
+          <!-- Flip hint -->
+          <div class="page-flip-hint">
+            <div class="flip-hint">⬅ <kbd>বাম ক্লিক</kbd> আগের পৃষ্ঠা</div>
+            <div class="flip-hint">পরের পৃষ্ঠা <kbd>ডান ক্লিক</kbd> ➡</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- ═══════════════════════════════════════════════════
+         OUR BOOKS SECTION
+    ═══════════════════════════════════════════════════ -->
+    <section id="our-books" class="section" aria-label="Our books collection">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-tag tag-cyan">বই সংগ্রহ</span>
+          <h2 class="section-title">আমাদের <span style="background:linear-gradient(90deg,var(--neon-cyan),#0288d1);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">বই</span></h2>
+          <p class="section-desc">সেরা লেখকদের সেরা রচনা — বাংলা সাহিত্যের এক অসাধারণ সংগ্রহ</p>
+          <div class="glow-divider divider-cyan"></div>
+        </div>
+
+        <div class="books-grid" id="books-grid">
+          <!-- Book cards -->
+          <div class="book-card reveal" style="transition-delay:0.05s">
+            <div class="book-cover">
+              <div class="book-cover-inner" style="background:linear-gradient(135deg,#1a0533,#4a0080);">
+                <div class="book-spine"><img src="https://picsum.photos/40/40?random=1" alt="Spine Icon" style="width:24px;height:24px;object-fit:cover;border-radius:50%;" /></div>
+                <div class="book-cover-title">কবিতার আলো</div>
+              </div>
+              <div class="book-overlay"><div class="book-read-btn">পড়ুন</div></div>
+            </div>
+            <div class="book-info">
+              <div class="book-title">কবিতার আলো</div>
+              <div class="book-author">রমেন দাস</div>
+              <span class="book-genre">কবিতা</span>
+            </div>
+          </div>
+
+          <div class="book-card reveal" style="transition-delay:0.1s">
+            <div class="book-cover">
+              <div class="book-cover-inner" style="background:linear-gradient(135deg,#003533,#006666);">
+                <div class="book-spine"><img src="https://picsum.photos/40/40?random=2" alt="Spine Icon" style="width:24px;height:24px;object-fit:cover;border-radius:50%;" /></div>
+                <div class="book-cover-title">সমুদ্রের ডাক</div>
+              </div>
+              <div class="book-overlay"><div class="book-read-btn">পড়ুন</div></div>
+            </div>
+            <div class="book-info">
+              <div class="book-title">সমুদ্রের ডাক</div>
+              <div class="book-author">নমিতা চক্রবর্তী</div>
+              <span class="book-genre">উপন্যাস</span>
+            </div>
+          </div>
+
+          <div class="book-card reveal" style="transition-delay:0.15s">
+            <div class="book-cover">
+              <div class="book-cover-inner" style="background:linear-gradient(135deg,#1a0a00,#5c2a00);">
+                <div class="book-spine"><img src="https://picsum.photos/40/40?random=3" alt="Spine Icon" style="width:24px;height:24px;object-fit:cover;border-radius:50%;" /></div>
+                <div class="book-cover-title">মুক্তির পথে</div>
+              </div>
+              <div class="book-overlay"><div class="book-read-btn">পড়ুন</div></div>
+            </div>
+            <div class="book-info">
+              <div class="book-title">মুক্তির পথে</div>
+              <div class="book-author">কল্যাণ ভট্টাচার্য</div>
+              <span class="book-genre">ইতিহাস</span>
+            </div>
+          </div>
+
+          <div class="book-card reveal" style="transition-delay:0.2s">
+            <div class="book-cover">
+              <div class="book-cover-inner" style="background:linear-gradient(135deg,#00112b,#003380);">
+                <div class="book-spine"><img src="https://picsum.photos/40/40?random=4" alt="Spine Icon" style="width:24px;height:24px;object-fit:cover;border-radius:50%;" /></div>
+                <div class="book-cover-title">রাতের গল্প</div>
+              </div>
+              <div class="book-overlay"><div class="book-read-btn">পড়ুন</div></div>
+            </div>
+            <div class="book-info">
+              <div class="book-title">রাতের গল্প</div>
+              <div class="book-author">সুনীতা সেন</div>
+              <span class="book-genre">ছোট গল্প</span>
+            </div>
+          </div>
+
+          <div class="book-card reveal" style="transition-delay:0.25s">
+            <div class="book-cover">
+              <div class="book-cover-inner" style="background:linear-gradient(135deg,#1a0020,#550066);">
+                <div class="book-spine"><img src="https://picsum.photos/40/40?random=5" alt="Spine Icon" style="width:24px;height:24px;object-fit:cover;border-radius:50%;" /></div>
+                <div class="book-cover-title">ফুলের বাগান</div>
+              </div>
+              <div class="book-overlay"><div class="book-read-btn">পড়ুন</div></div>
+            </div>
+            <div class="book-info">
+              <div class="book-title">ফুলের বাগান</div>
+              <div class="book-author">জয়ন্ত মুখার্জী</div>
+              <span class="book-genre">গল্প সংকলন</span>
+            </div>
+          </div>
+
+          <div class="book-card reveal" style="transition-delay:0.3s">
+            <div class="book-cover">
+              <div class="book-cover-inner" style="background:linear-gradient(135deg,#001a0a,#004422);">
+                <div class="book-spine"><img src="https://picsum.photos/40/40?random=6" alt="Spine Icon" style="width:24px;height:24px;object-fit:cover;border-radius:50%;" /></div>
+                <div class="book-cover-title">সবুজের গান</div>
+              </div>
+              <div class="book-overlay"><div class="book-read-btn">পড়ুন</div></div>
+            </div>
+            <div class="book-info">
+              <div class="book-title">সবুজের গান</div>
+              <div class="book-author">রূপা ঘোযাল</div>
+              <span class="book-genre">পরিবেশ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- ═══════════════════════════════════════════════════
+         EDITORIAL DESKS SECTION
+    ═══════════════════════════════════════════════════ -->
+    <section id="editorial-desks" class="section" aria-label="Editorial team">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-tag tag-magenta">সম্পাদকীয় দল</span>
+          <h2 class="section-title">আমাদের <span style="background:linear-gradient(90deg,var(--neon-magenta),var(--neon-pink));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">সম্পাদক</span></h2>
+          <p class="section-desc">দক্ষ ও অভিজ্ঞ সম্পাদকীয় দল যারা প্রতিদিন আপনার জন্য সেরা কন্টেন্ট তৈরি করছেন</p>
+          <div class="glow-divider divider-magenta"></div>
+        </div>
+
+        <div class="editorial-grid">
+          <div class="editor-card reveal" style="transition-delay:0.05s">
+            <div class="editor-avatar">
+              <img src="https://picsum.photos/150/150?random=11" alt="অলোক রায়" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
+              <span class="online-badge"></span>
+            </div>
+            <div class="editor-name">অলোক রায়</div>
+            <div class="editor-role">প্রধান সম্পাদক</div>
+            <div class="editor-desk">সাহিত্য ও সংস্কৃতি বিভাগ</div>
+            <div class="editor-social">
+              <a href="#" class="social-btn">📘</a>
+              <a href="#" class="social-btn">🐦</a>
+              <a href="#" class="social-btn">💼</a>
+            </div>
+          </div>
+
+          <div class="editor-card reveal" style="transition-delay:0.1s">
+            <div class="editor-avatar">
+              <img src="https://picsum.photos/150/150?random=12" alt="পল্লবী শর্মা" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
+              <span class="online-badge"></span>
+            </div>
+            <div class="editor-name">পল্লবী শর্মা</div>
+            <div class="editor-role">সহকারী সম্পাদক</div>
+            <div class="editor-desk">রাজনীতি ও অর্থনীতি বিভাগ</div>
+            <div class="editor-social">
+              <a href="#" class="social-btn">📘</a>
+              <a href="#" class="social-btn">🐦</a>
+              <a href="#" class="social-btn">💼</a>
+            </div>
+          </div>
+
+          <div class="editor-card reveal" style="transition-delay:0.15s">
+            <div class="editor-avatar">
+              <img src="https://picsum.photos/150/150?random=13" alt="মানস ঘোষ" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
+              <span class="online-badge"></span>
+            </div>
+            <div class="editor-name">মানস ঘোষ</div>
+            <div class="editor-role">ক্রীড়া সম্পাদক</div>
+            <div class="editor-desk">খেলাধুলা বিভাগ</div>
+            <div class="editor-social">
+              <a href="#" class="social-btn">📘</a>
+              <a href="#" class="social-btn">🐦</a>
+              <a href="#" class="social-btn">💼</a>
+            </div>
+          </div>
+
+          <div class="editor-card reveal" style="transition-delay:0.2s">
+            <div class="editor-avatar">
+              <img src="https://picsum.photos/150/150?random=14" alt="তনিমা চ্যাটার্জী" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
+              <span class="online-badge" style="background:rgba(255,215,0,0.8)"></span>
+            </div>
+            <div class="editor-name">তনিমা চ্যাটার্জী</div>
+            <div class="editor-role">বিজ্ঞান সম্পাদক</div>
+            <div class="editor-desk">বিজ্ঞান ও প্রযুক্তি বিভাগ</div>
+            <div class="editor-social">
+              <a href="#" class="social-btn">📘</a>
+              <a href="#" class="social-btn">🐦</a>
+              <a href="#" class="social-btn">💼</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- ═══════════════════════════════════════════════════
+         ANNOUNCEMENTS & EVENTS SECTION
+    ═══════════════════════════════════════════════════ -->
+    <section id="announcements" class="section" aria-label="Announcements and events">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-tag tag-gold">ঘোষণা ও ইভেন্ট</span>
+          <h2 class="section-title">সর্বশেষ <span style="background:linear-gradient(90deg,var(--neon-orange),var(--neon-gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">ঘোষণা</span></h2>
+          <p class="section-desc">আমাদের সকল কার্যক্রম, ইভেন্ট এবং গুরুত্বপূর্ণ বিজ্ঞপ্তি সম্পর্কে আপডেট থাকুন</p>
+          <div class="glow-divider divider-gold"></div>
+        </div>
+
+        <div class="announce-grid">
+          <div class="announce-card reveal" style="transition-delay:0.05s">
+            <div class="announce-type type-event">🎭 ইভেন্ট</div>
+            <div class="announce-title">বার্ষিক সাহিত্য উৎসব ২০২৬</div>
+            <div class="announce-desc">কলকাতায় আয়োজিত বার্ষিক সাহিত্য উৎসবে অংশ নিন। সেরা লেখক ও কবিদের সাথে সরাসরি কথা বলার সুযোগ।</div>
+            <div class="announce-meta">
+              <div class="announce-date"><span class="announce-dot"></span> ১৫ আগস্ট, ২০২৬</div>
+              <span>কলকাতা, ইন্ডিয়া</span>
+            </div>
+          </div>
+
+          <div class="announce-card reveal" style="transition-delay:0.1s">
+            <div class="announce-type type-notice">📢 বিজ্ঞপ্তি</div>
+            <div class="announce-title">নতুন লেখক নিবন্ধন শুরু</div>
+            <div class="announce-desc">বিপবুকস-এ লিখতে চান? এখনই নিবন্ধন করুন। সেরা লেখা প্রকাশিত হবে এবং লেখককে পুরস্কৃত করা হবে।</div>
+            <div class="announce-meta">
+              <div class="announce-date"><span class="announce-dot" style="background:var(--neon-pink)"></span> ১ জুলাই থেকে ৩১ আগস্ট</div>
+              <span>অনলাইন</span>
+            </div>
+          </div>
+
+          <div class="announce-card reveal" style="transition-delay:0.15s">
+            <div class="announce-type type-award">🏆 পুরস্কার</div>
+            <div class="announce-title">পাঠক পুরস্কার ২০২৬ মনোনয়ন</div>
+            <div class="announce-desc">এ বছরের সেরা বই ও লেখক নির্বাচনে আপনার vote দিন। পাঠকদের মতামতেই নির্ধারিত হবে পুরস্কার।</div>
+            <div class="announce-meta">
+              <div class="announce-date"><span class="announce-dot" style="background:var(--neon-gold)"></span> চলছে এখন</div>
+              <span>অনলাইন ভোটিং</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- ═══════════════════════════════════════════════════
+         BLOGS SECTION
+    ═══════════════════════════════════════════════════ -->
+    <section id="blogs" class="section" aria-label="Blog articles">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-tag tag-green">ব্লগ</span>
+          <h2 class="section-title">সর্বশেষ <span style="background:linear-gradient(90deg,var(--neon-green),#00bfa5);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">ব্লগ</span></h2>
+          <p class="section-desc">আমাদের দক্ষ লেখকদের তাজা ও তথ্যবহুল ব্লগ পোস্ট পড়ুন</p>
+          <div class="glow-divider divider-green"></div>
+        </div>
+
+        <div class="blogs-grid">
+          <div class="blog-card reveal" style="transition-delay:0.05s">
+            <div class="blog-img" style="background: none; padding: 0;">
+              <img src="https://picsum.photos/400/250?random=21" alt="রবীন্দ্রনাথের কবিতায় প্রকৃতির চিত্র" style="width:100%;height:100%;object-fit:cover;" />
+              <div class="blog-img-overlay"></div>
+            </div>
+            <div class="blog-body">
+              <span class="blog-cat">সাহিত্য</span>
+              <div class="blog-title">রবীন্দ্রনাথের কবিতায় প্রকৃতির চিত্র</div>
+              <div class="blog-excerpt">রবীন্দ্রনাথ ঠাকুরের কবিতায় প্রকৃতি কেবল পটভূমি নয়, এটি মানবজীবনের সাথে এক অবিচ্ছেদ্য সম্পর্কে জড়িত...</div>
+              <div class="blog-footer">
+                <span class="blog-author">সুনীতা সেন</span>
+                <span class="blog-date">১৫ জুলাই, ২০২৬</span>
+              </div>
+              <a href="#" class="blog-read-more" style="margin-top:10px;display:inline-flex;">পড়ুন →</a>
+            </div>
+          </div>
+
+          <div class="blog-card reveal" style="transition-delay:0.1s">
+            <div class="blog-img" style="background: none; padding: 0;">
+              <img src="https://picsum.photos/400/250?random=22" alt="ইন্ডিয়ান ক্রিকেটের স্বর্ণযুগ" style="width:100%;height:100%;object-fit:cover;" />
+              <div class="blog-img-overlay"></div>
+            </div>
+            <div class="blog-body">
+              <span class="blog-cat">খেলাধুলা</span>
+              <div class="blog-title">ইন্ডিয়ান ক্রিকেটের স্বর্ণযুগ</div>
+              <div class="blog-excerpt">বিশ্বকাপে ইন্ডিয়ার অসাধারণ পারফরম্যান্স নিয়ে বিশ্লেষণ। তরুণ খেলোয়াড়রা কীভাবে দলকে নতুন উচ্চতায় নিয়ে যাচ্ছে...</div>
+              <div class="blog-footer">
+                <span class="blog-author">মানস ঘোষ</span>
+                <span class="blog-date">১৪ জুলাই, ২০২৬</span>
+              </div>
+              <a href="#" class="blog-read-more" style="margin-top:10px;display:inline-flex;">পড়ুন →</a>
+            </div>
+          </div>
+
+          <div class="blog-card reveal" style="transition-delay:0.15s">
+            <div class="blog-img" style="background: none; padding: 0;">
+              <img src="https://picsum.photos/400/250?random=23" alt="ডিজিটাল ইন্ডিয়ার পরবর্তী ধাপ" style="width:100%;height:100%;object-fit:cover;" />
+              <div class="blog-img-overlay"></div>
+            </div>
+            <div class="blog-body">
+              <span class="blog-cat">রাজনীতি</span>
+              <div class="blog-title">ডিজিটাল ইন্ডিয়ার পরবর্তী ধাপ</div>
+              <div class="blog-excerpt">স্মার্ট নেশন গড়ার লক্ষ্যে সরকারের নতুন পরিকল্পনা এবং প্রযুক্তি খাতে বিনিয়োগের সম্ভাবনা নিয়ে বিশ্লেষণ...</div>
+              <div class="blog-footer">
+                <span class="blog-author">পল্লবী শর্মা</span>
+                <span class="blog-date">১৩ জুলাই, ২০২৬</span>
+              </div>
+              <a href="#" class="blog-read-more" style="margin-top:10px;display:inline-flex;">পড়ুন →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- ═══════════════════════════════════════════════════
+         ABOUT SECTION
+    ═══════════════════════════════════════════════════ -->
+    <section id="about" class="section" aria-label="About BipBooks">
+      <div class="section-inner">
+        <div class="about-grid">
+          <div class="about-visual reveal-left">
+            <div class="about-glow-card">
+              <span style="font-size:5rem">📚</span>
+              <span style="font-size:1.2rem;font-weight:800;color:var(--neon-gold)">BipBooks</span>
+            </div>
+            <div class="about-floating-badge badge-top">
+              📖 ৫০+ সাপ্তাহিক সংখ্যা
+            </div>
+            <div class="about-floating-badge badge-bottom">
+              ✨ বাংলার প্রথম ই-পেপার
+            </div>
+          </div>
+
+          <div class="about-content reveal-right">
+            <div class="section-header" style="text-align:left;margin-bottom:32px;">
+              <span class="section-tag tag-gold">আমাদের সম্পর্কে</span>
+              <h2 class="section-title">বিপবুকস <span style="background:linear-gradient(90deg,var(--neon-gold),var(--neon-orange));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">কী?</span></h2>
+              <div class="glow-divider divider-gold" style="margin:16px 0 0;"></div>
+            </div>
+
+            <p class="about-text">বিপবুকস ইন্ডিয়ার একটি অগ্রণী ডিজিটাল পাবলিশিং প্ল্যাটফর্ম। আমরা প্রতি সপ্তাহে একটি সম্পূর্ণ ম্যাগাজিন প্রকাশ করি যেখানে সাহিত্য, রাজনীতি, খেলাধুলা, বিজ্ঞান সহ বিভিন্ন বিষয়ে তথ্যবহুল ও আকর্ষণীয় লেখা থাকে।</p>
+            <p class="about-text">আমাদের লক্ষ্য হলো বাংলা পড়ার সংস্কৃতিকে ডিজিটাল যুগে নিয়ে আসা এবং পাঠকদের কাছে সহজে পৌঁছে দেওয়া।</p>
+
+            <div class="about-features">
+              <div class="about-feature">
+                <div class="feature-icon">📰</div>
+                <div class="feature-text">
+                  <div class="ft-title">সাপ্তাহিক ই-পেপার</div>
+                  <div class="ft-desc">প্রতি সপ্তাহে নতুন ম্যাগাজিন, PDF আকারে পড়ুন</div>
+                </div>
+              </div>
+              <div class="about-feature">
+                <div class="feature-icon">🔄</div>
+                <div class="feature-text">
+                  <div class="ft-title">স্বয়ংক্রিয় আপডেট</div>
+                  <div class="ft-desc">৬ দিন পর পুরনো সংখ্যা সরে যায়, নতুন আসে</div>
+                </div>
+              </div>
+              <div class="about-feature">
+                <div class="feature-icon">📱</div>
+                <div class="feature-text">
+                  <div class="ft-title">সকল ডিভাইসে পড়ুন</div>
+                  <div class="ft-desc">মোবাইল, ট্যাবলেট, ল্যাপটপ — সব জায়গায়</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- ═══════════════════════════════════════════════════
+         CONTACT SECTION
+    ═══════════════════════════════════════════════════ -->
+    <section id="contact" class="section" aria-label="Contact us">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-tag tag-cyan">যোগাযোগ</span>
+          <h2 class="section-title">আমাদের সাথে <span style="background:linear-gradient(90deg,var(--neon-cyan),#0288d1);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">কথা বলুন</span></h2>
+          <p class="section-desc">যেকোনো প্রশ্ন, পরামর্শ বা সহযোগিতার জন্য আমাদের সাথে যোগাযোগ করুন</p>
+          <div class="glow-divider divider-cyan"></div>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info reveal-left">
+            <div class="contact-info-item">
+              <div class="contact-icon">📧</div>
+              <div class="contact-detail">
+                <div class="cd-label">ইমেইল</div>
+                <div class="cd-value">info@bipbooks.com</div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-icon">📞</div>
+              <div class="contact-detail">
+                <div class="cd-label">ফোন</div>
+                <div class="cd-value">+91 9XXX-XXXXXX</div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-icon">📍</div>
+              <div class="contact-detail">
+                <div class="cd-label">ঠিকানা</div>
+                <div class="cd-value">কলকাতা, ইন্ডিয়া</div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-icon">📘</div>
+              <div class="contact-detail">
+                <div class="cd-label">ফেসবুক</div>
+                <div class="cd-value">facebook.com/bipbooks</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal-right">
+            <form class="contact-form" id="contact-form" onsubmit="handleContactForm(event)">
+              <div class="form-group">
+                <label class="form-label" for="contact-name">আপনার নাম</label>
+                <input class="form-input" type="text" id="contact-name" name="name" placeholder="আপনার পূর্ণ নাম লিখুন" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-email">ইমেইল ঠিকানা</label>
+                <input class="form-input" type="email" id="contact-email" name="email" placeholder="your@email.com" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-subject">বিষয়</label>
+                <input class="form-input" type="text" id="contact-subject" name="subject" placeholder="বিষয় লিখুন" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-message">বার্তা</label>
+                <textarea class="form-textarea" id="contact-message" name="message" placeholder="আপনার বার্তা লিখুন..." required></textarea>
+              </div>
+              <button type="submit" class="btn-submit" id="contact-submit-btn">📨 বার্তা পাঠান</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- end page-wrapper -->
+
+  <!-- ─── FOOTER ───────────────────────────────────────── -->
+  <footer role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-icon">বি</div>
+            <span class="footer-logo-text">BipBooks</span>
+          </div>
+          <p class="footer-desc">ইন্ডিয়ার প্রথম ডিজিটাল ম্যাগাজিন প্ল্যাটফর্ম। প্রতি সপ্তাহে নতুন সংখ্যা পড়ুন।</p>
+          <div class="footer-social">
+            <a href="#" class="f-social" aria-label="Facebook">📘</a>
+            <a href="#" class="f-social" aria-label="Twitter">🐦</a>
+            <a href="#" class="f-social" aria-label="YouTube">▶️</a>
+            <a href="#" class="f-social" aria-label="Instagram">📸</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>দ্রুত লিংক</h4>
+          <ul>
+            <li><a href="#home">হোম</a></li>
+            <li><a href="#epaper-section">ই-পেপার</a></li>
+            <li><a href="#our-books">আমাদের বই</a></li>
+            <li><a href="#editorial-desks">সম্পাদকীয়</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>বিভাগ</h4>
+          <ul>
+            <li><a href="#">বিনোদন</a></li>
+            <li><a href="#">খেলাধুলা</a></li>
+            <li><a href="#">রাজনীতি</a></li>
+            <li><a href="#">সাহিত্য</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>সহায়তা</h4>
+          <ul>
+            <li><a href="#contact">যোগাযোগ</a></li>
+            <li><a href="#about">আমাদের সম্পর্কে</a></li>
+            <li><a href="#">গোপনীয়তা নীতি</a></li>
+            <li><a href="#">শর্তাবলী</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© ২০২৬ <a href="#home">BipBooks</a>. সর্বস্বত্ব সংরক্ষিত।</span>
+        <a href="admin.html" class="admin-link">🔐 Admin Panel</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── TOAST ─────────────────────────────────────────── -->
+  <div class="toast" id="main-toast" role="alert" aria-live="assertive">
+    <span class="toast-icon" id="toast-icon">✅</span>
+    <span id="toast-msg">বার্তা</span>
+  </div>
+
+  <!-- ─── SCRIPTS ──────────────────────────────────────── -->
+  <!-- PDF.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    if (typeof pdfjsLib !== 'undefined') {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+  </script>
+  <script src="js/idb.js"></script>
+  <script src="js/realtime.js"></script>
+  <script src="js/epaper.js"></script>
+  <script src="js/main.js"></script>
+
+
+</body>
+</html>

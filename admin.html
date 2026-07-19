@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BipBooks Admin — ম্যাগাজিন ম্যানেজমেন্ট</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body class="admin-body">
+
+  <!-- ─── LOGIN SCREEN ──────────────────────────────────── -->
+  <div id="admin-login-screen" class="admin-login-screen">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="icon">বি</div>
+        <h1>BipBooks Admin</h1>
+        <p>ম্যাগাজিন ম্যানেজমেন্ট প্যানেল</p>
+      </div>
+
+      <form class="login-form" id="admin-login-form" autocomplete="off">
+        <div>
+          <label for="admin-password-input">পাসওয়ার্ড</label>
+          <input
+            type="password"
+            id="admin-password-input"
+            placeholder="পাসওয়ার্ড লিখুন"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+        <div class="login-error" id="login-error"></div>
+        <button type="submit" class="login-btn" id="admin-login-btn">🔐 লগইন করুন</button>
+      </form>
+
+      <p style="text-align:center;margin-top:20px;font-size:0.72rem;color:rgba(255,255,255,0.25)">
+        <a href="index.html" style="color:rgba(255,215,0,0.5)">← ওয়েবসাইটে ফিরুন</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ─── ADMIN MAIN LAYOUT ─────────────────────────────── -->
+  <div id="admin-main-layout" class="admin-layout" style="display:none;">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">বি</div>
+        <div>
+          <div class="sidebar-logo-text">BipBooks</div>
+          <div class="sidebar-logo-sub">Admin Panel</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" role="navigation" aria-label="Admin navigation">
+        <div class="sidebar-nav-item active" data-panel="panel-upload" id="snav-upload">
+          <span class="nav-icon">📤</span>
+          <span class="nav-label">ম্যাগাজিন আপলোড</span>
+        </div>
+        <div class="sidebar-nav-item" data-panel="panel-current" id="snav-current">
+          <span class="nav-icon">📰</span>
+          <span class="nav-label">বর্তমান সংখ্যা</span>
+        </div>
+        <div class="sidebar-nav-item" data-panel="panel-history" id="snav-history">
+          <span class="nav-icon">📋</span>
+          <span class="nav-label">পুরনো সংখ্যা</span>
+        </div>
+        <div class="sidebar-nav-item" data-panel="panel-stats" id="snav-stats">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label">পরিসংখ্যান</span>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <a href="index.html" target="_blank" class="sidebar-nav-item" style="text-decoration:none;" id="snav-website">
+          <span class="nav-icon">🌐</span>
+          <span class="nav-label">ওয়েবসাইট দেখুন</span>
+        </a>
+      </nav>
+
+      <button class="sidebar-logout" id="admin-logout-btn">
+        <span>🚪</span> লগআউট
+      </button>
+    </aside>
+
+    <!-- Main content -->
+    <main class="admin-main">
+
+      <!-- Top bar -->
+      <div class="admin-top-bar">
+        <h2 id="panel-title">📤 ম্যাগাজিন আপলোড</h2>
+        <div class="top-actions">
+          <div class="admin-clock">
+            <span class="time" id="admin-clock-time">--:--:--</span>
+            <span id="admin-clock-date">-- --- ----</span>
+          </div>
+          <span id="admin-issue-status" style="font-size:0.75rem;padding:4px 12px;border-radius:50px;background:rgba(0,230,118,0.1);color:#00e676;border:1px solid rgba(0,230,118,0.25);">লোড হচ্ছে...</span>
+        </div>
+      </div>
+
+      <!-- ═══════ PANEL: UPLOAD ═══════ -->
+      <div class="admin-panel active" id="panel-upload">
+
+        <!-- Upload Zone -->
+        <div class="panel-card">
+          <h3><span class="ph-icon">📤</span> নতুন ম্যাগাজিন আপলোড করুন</h3>
+
+          <div class="upload-zone" id="upload-zone" role="button" tabindex="0" aria-label="PDF ফাইল আপলোড করুন">
+            <input type="file" id="pdf-file-input" accept=".pdf,application/pdf" />
+            <span class="upload-icon">📄</span>
+            <div class="upload-title">PDF ফাইল আপলোড করুন</div>
+            <div class="upload-sub">PDF ফাইল এখানে টানুন অথবা <span>ক্লিক করুন</span></div>
+            <div id="selected-file-name" style="margin-top:10px;font-size:0.8rem;"></div>
+            <div class="upload-progress-wrap" id="upload-progress-wrap">
+              <div class="upload-progress-bar">
+                <div class="upload-progress-fill" id="upload-progress-fill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Issue Details -->
+        <div class="panel-card">
+          <h3><span class="ph-icon">📝</span> সংখ্যার বিবরণ</h3>
+
+          <div class="form-row">
+            <div class="form-group-admin">
+              <label for="issue-title">ম্যাগাজিনের শিরোনাম *</label>
+              <input type="text" id="issue-title" placeholder="যেমন: BipBooks সাপ্তাহিক - জুলাই ৩য় সংখ্যা" />
+            </div>
+            <div class="form-group-admin">
+              <label for="issue-number">সংখ্যা নম্বর</label>
+              <input type="text" id="issue-number" placeholder="যেমন: ৫২, Vol.2 No.3" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group-admin">
+              <label for="issue-pub-date">প্রকাশের তারিখ ও সময় *</label>
+              <input type="datetime-local" id="issue-pub-date" />
+            </div>
+            <div class="form-group-admin">
+              <label for="issue-expire-note">মেয়াদ (স্বয়ংক্রিয়)</label>
+              <input type="text" id="issue-expire-note" value="৬ দিন পর স্বয়ংক্রিয়ভাবে শেষ হবে" readonly style="opacity:0.5;cursor:not-allowed;" />
+            </div>
+          </div>
+
+          <div style="margin-top:8px;">
+            <button class="btn-admin btn-admin-gold" id="upload-submit-btn">
+              📤 ম্যাগাজিন প্রকাশ করুন
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Tips -->
+        <div class="panel-card" style="background:rgba(255,215,0,0.04);border-color:rgba(255,215,0,0.15);">
+          <h3><span class="ph-icon">💡</span> দ্রুত নির্দেশিকা</h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+            <li style="font-size:0.83rem;color:rgba(255,255,255,0.6);display:flex;gap:8px;align-items:flex-start;"><span>📌</span> প্রতি সপ্তাহে একটি PDF আপলোড করুন</li>
+            <li style="font-size:0.83rem;color:rgba(255,255,255,0.6);display:flex;gap:8px;align-items:flex-start;"><span>⏰</span> PDF স্বয়ংক্রিয়ভাবে ৬ দিন পর মেয়াদ শেষ হয়ে যাবে</li>
+            <li style="font-size:0.83rem;color:rgba(255,255,255,0.6);display:flex;gap:8px;align-items:flex-start;"><span>📱</span> ওয়েবসাইটে ভিজিটররা বাম ক্লিক = আগের পৃষ্ঠা, ডান ক্লিক = পরের পৃষ্ঠা</li>
+            <li style="font-size:0.83rem;color:rgba(255,255,255,0.6);display:flex;gap:8px;align-items:flex-start;"><span>💾</span> PDF সাইজ সর্বোচ্চ ৫০ MB রাখুন — বড় ফাইল ধীরে লোড হয়</li>
+            <li style="font-size:0.83rem;color:rgba(255,255,255,0.6);display:flex;gap:8px;align-items:flex-start;"><span>🔐</span> Admin পাসওয়ার্ড: <code style="background:rgba(255,255,255,0.1);padding:2px 8px;border-radius:4px;color:#ffd700;">bipbooks2026</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══════ PANEL: CURRENT ISSUE ═══════ -->
+      <div class="admin-panel" id="panel-current">
+        <div class="panel-card">
+          <h3><span class="ph-icon">📰</span> বর্তমান সক্রিয় সংখ্যা</h3>
+          <div id="current-issue-container">
+            <div class="no-issue-msg">লোড হচ্ছে...</div>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <h3><span class="ph-icon">👁️</span> লাইভ প্রিভিউ</h3>
+          <p style="font-size:0.83rem;color:rgba(255,255,255,0.45);margin-bottom:14px;">ওয়েবসাইটে ভিজিটররা ঠিক এভাবেই দেখবেন:</p>
+          <a href="index.html#epaper-section" target="_blank" class="btn-admin btn-admin-cyan">
+            🔗 ওয়েবসাইটে দেখুন
+          </a>
+        </div>
+      </div>
+
+      <!-- ═══════ PANEL: HISTORY ═══════ -->
+      <div class="admin-panel" id="panel-history">
+        <div class="panel-card">
+          <h3><span class="ph-icon">📋</span> পুরনো সংখ্যাসমূহ</h3>
+          <div style="overflow-x:auto;">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>শিরোনাম</th>
+                  <th>সংখ্যা</th>
+                  <th>প্রকাশের তারিখ</th>
+                  <th>আর্কাইভ তারিখ</th>
+                  <th>অবস্থা</th>
+                  <th>অ্যাকশন</th>
+                </tr>
+              </thead>
+              <tbody id="history-tbody">
+                <tr><td colspan="6" style="text-align:center;color:rgba(255,255,255,0.3);padding:24px">কোনো ইতিহাস নেই</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ PANEL: STATS ═══════ -->
+      <div class="admin-panel" id="panel-stats">
+        <div class="admin-stats">
+          <div class="astat-card astat-gold">
+            <div class="astat-icon">📚</div>
+            <span class="astat-val" id="stat-total-issues">০</span>
+            <span class="astat-label">মোট সংখ্যা প্রকাশিত</span>
+          </div>
+          <div class="astat-card astat-green">
+            <div class="astat-icon">✅</div>
+            <span class="astat-val" id="stat-active-issue">০</span>
+            <span class="astat-label">সক্রিয় সংখ্যা</span>
+          </div>
+          <div class="astat-card astat-pink">
+            <div class="astat-icon">⏰</div>
+            <span class="astat-val" id="stat-expired-issues">০</span>
+            <span class="astat-label">মেয়াদোত্তীর্ণ সংখ্যা</span>
+          </div>
+          <div class="astat-card astat-cyan">
+            <div class="astat-icon">💾</div>
+            <span class="astat-val" id="stat-total-size">০ MB</span>
+            <span class="astat-label">মোট স্টোরেজ ব্যবহার</span>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <h3><span class="ph-icon">ℹ️</span> সিস্টেম তথ্য</h3>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;font-size:0.83rem;">
+              <span style="color:rgba(255,255,255,0.5)">মেয়াদ নীতি</span>
+              <span style="color:#ffd700;">৬ দিন পর স্বয়ংক্রিয়ভাবে শেষ</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;font-size:0.83rem;">
+              <span style="color:rgba(255,255,255,0.5)">স্টোরেজ</span>
+              <span style="color:#00e5ff;">IndexedDB + LocalStorage</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;font-size:0.83rem;">
+              <span style="color:rgba(255,255,255,0.5)">সর্বোচ্চ ফাইল সাইজ</span>
+              <span style="color:#00e676;">৫০ MB</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;font-size:0.83rem;">
+              <span style="color:rgba(255,255,255,0.5)">PDF রেন্ডারিং</span>
+              <span style="color:#e040fb;">PDF.js (Mozilla)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Admin Toast -->
+  <div class="admin-toast" id="admin-toast" role="alert">
+    <span id="admin-toast-msg"></span>
+  </div>
+
+  <script src="js/idb.js"></script>
+  <script src="js/realtime.js"></script>
+  <script src="js/admin.js"></script>
+
+  <script>
+    // Set default datetime to now
+    window.addEventListener('DOMContentLoaded', function() {
+      const pubDateInput = document.getElementById('issue-pub-date');
+      if (pubDateInput) {
+        const now = new Date();
+        const local = new Date(now - now.getTimezoneOffset() * 60000)
+          .toISOString().slice(0, 16);
+        pubDateInput.value = local;
+      }
+    });
+  </script>
+</body>
+</html>
