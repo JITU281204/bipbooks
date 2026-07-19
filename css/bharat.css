@@ -87,29 +87,37 @@ body.bharat-theme .nav-clock {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   color: var(--bip-gold);
   border: 1px solid rgba(212, 175, 55, 0.4);
   background: rgba(212, 175, 55, 0.05);
-  border-radius: 30px;
-  padding: 8px 16px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  border-radius: 20px;
+  padding: 5px 12px;
+  white-space: nowrap;
+  min-width: auto;
+  width: auto;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 body.bharat-theme .clock-time {
   color: var(--bip-text-light) !important;
   text-shadow: none !important;
-  font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 1rem;
+  background: none !important;
+  font-family: var(--font-sans) !important;
+  font-weight: 700;
+  font-size: 0.9rem !important;
   letter-spacing: 1px;
+  white-space: nowrap;
 }
 body.bharat-theme .clock-date {
   color: var(--bip-gold) !important;
-  font-family: var(--font-serif);
+  background: none !important;
+  font-family: var(--font-sans) !important;
   font-style: italic;
-  font-size: 0.9rem;
+  font-size: 0.78rem !important;
   border-left: 1px solid rgba(212, 175, 55, 0.3);
-  padding-left: 10px;
+  padding-left: 8px;
+  white-space: nowrap;
+  line-height: 1.2;
 }
 body.bharat-theme .nav-links a {
   background: transparent !important;
