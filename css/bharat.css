@@ -84,11 +84,32 @@ body.bharat-theme .nav-logo-text {
   -webkit-text-fill-color: var(--bip-text-light) !important;
 }
 body.bharat-theme .nav-clock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
   color: var(--bip-gold);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.4);
   background: rgba(212, 175, 55, 0.05);
-  border-radius: 4px;
-  padding: 5px 10px;
+  border-radius: 30px;
+  padding: 8px 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+body.bharat-theme .clock-time {
+  color: var(--bip-text-light) !important;
+  text-shadow: none !important;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+body.bharat-theme .clock-date {
+  color: var(--bip-gold) !important;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.9rem;
+  border-left: 1px solid rgba(212, 175, 55, 0.3);
+  padding-left: 10px;
 }
 body.bharat-theme .nav-links a {
   background: transparent !important;
