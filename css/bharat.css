@@ -69,19 +69,51 @@ body.bharat-theme .logo-img {
   border-radius: 0;
 }
 body.bharat-theme .nav-logo-icon {
+  background: transparent !important;
+  box-shadow: none !important;
   color: var(--bip-gold) !important;
   text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+  font-size: 1.8rem;
 }
 body.bharat-theme .nav-logo-text {
-  color: var(--bip-text-light);
+  color: var(--bip-text-light) !important;
   font-family: var(--font-serif);
   font-size: 1.5rem;
   letter-spacing: 2px;
+  background: none !important;
+  -webkit-text-fill-color: var(--bip-text-light) !important;
 }
 body.bharat-theme .nav-clock {
   color: var(--bip-gold);
   border: 1px solid rgba(212, 175, 55, 0.3);
   background: rgba(212, 175, 55, 0.05);
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+body.bharat-theme .nav-links a {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 5px 10px !important;
+  border-radius: 0 !important;
+}
+body.bharat-theme .nav-links a.active {
+  color: var(--bip-gold) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-bottom: 2px solid var(--bip-gold);
+}
+body.bharat-theme .btn-login,
+body.bharat-theme .btn-logout,
+body.bharat-theme #user-dashboard-link {
+  font-family: var(--font-sans);
+}
+body.bharat-theme .btn-epaper {
+  display: none !important; /* Hiding the huge yellow button for premium look */
+}
+body.bharat-theme .ticker-wrap,
+body.bharat-theme .banner,
+body.bharat-theme .our-books {
+  display: none !important; /* Hiding old non-premium sections */
 }
 
 /* 1. Publisher Banner */
