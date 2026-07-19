@@ -23,6 +23,25 @@ const provider = new firebase.auth.GoogleAuthProvider();
     const profileBtn = document.getElementById('user-profile-btn');
     const profileImg = document.getElementById('user-profile-img');
     const logoutBtn = document.getElementById('user-logout-btn');
+    const dropdown = document.querySelector('.user-dropdown');
+    let dropdownTimeout;
+
+    if (profileBtn && dropdown) {
+      profileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.style.display = 'flex';
+        clearTimeout(dropdownTimeout);
+        dropdownTimeout = setTimeout(() => {
+          dropdown.style.display = 'none';
+        }, 5000); // Hide after 5 seconds
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.user-profile')) {
+          dropdown.style.display = 'none';
+        }
+      });
+    }
     
 
     // Authentication Listeners

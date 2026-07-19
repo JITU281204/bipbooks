@@ -108,14 +108,25 @@ document.getElementById('profile-form').addEventListener('submit', async (e) => 
     updatedAt: firebase.firestore.FieldValue.serverTimestamp()
   };
 
+  const timeoutPromise = new Promise((_, reject) => 
+    setTimeout(() => reject(new Error("Timeout")), 10000)
+  );
+
   try {
-    await db.collection('users').doc(user.uid).set(data, { merge: true });
+    await Promise.race([
+      db.collection('users').doc(user.uid).set(data, { merge: true }),
+      timeoutPromise
+    ]);
     showToast('✅ প্রোফাইল সফলভাবে আপডেট হয়েছে!');
     document.getElementById('header-user-name').textContent = data.name;
     document.getElementById('welcome-name').textContent = data.name;
   } catch (err) {
     console.error(err);
-    alert('Failed to update: ' + err.message);
+    if (err.message === "Timeout") {
+      alert("ডেটা সেভ হচ্ছে না! ⚠️\n\nদয়া করে আপনার Firebase Console এ গিয়ে 'Firestore Database' তৈরি করেছেন কিনা চেক করুন।\n\n(Build -> Firestore Database -> Create Database -> Start in Test Mode)");
+    } else {
+      alert('Failed to update: ' + err.message);
+    }
   } finally {
     btn.disabled = false;
     btn.textContent = "তথ্য সেভ করুন";

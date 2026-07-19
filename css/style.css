@@ -1370,9 +1370,7 @@ footer::before {
   min-width: 120px;
   backdrop-filter: blur(10px);
 }
-.user-profile:hover .user-dropdown {
-  display: flex;
-}
+
 #user-logout-btn {
   background: transparent;
   border: none;
