@@ -1,6 +1,3 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-
 // ─── Firebase Config ────────────────────────────────────────
 const firebaseConfig = {
   apiKey: "AIzaSyC47j_zGeawZaI6gm0nE4EccIt4afrIIjE",
@@ -11,9 +8,9 @@ const firebaseConfig = {
   appId: "1:102356999864:web:16fa5845df6eaed245de4d"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
 
 // ─── Payment Gateway Placeholder ────────────────────────────
 window.initiatePayment = function(planId, price) {
@@ -47,17 +44,17 @@ window.initiatePayment = function(planId, price) {
 
     if (loginBtn) {
       loginBtn.addEventListener('click', () => {
-        signInWithPopup(auth, provider).catch(err => console.error(err));
+        auth.signInWithPopup(provider).catch(err => console.error(err));
       });
     }
 
     if (logoutBtn) {
       logoutBtn.addEventListener('click', () => {
-        signOut(auth);
+        auth.signOut();
       });
     }
 
-    onAuthStateChanged(auth, (user) => {
+    auth.onAuthStateChanged((user) => {
       if (user) {
         if (loginBtn) loginBtn.style.display = 'none';
         if (profileBtn) profileBtn.style.display = 'flex';
