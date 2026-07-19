@@ -44,7 +44,10 @@ window.initiatePayment = function(planId, price) {
 
     if (loginBtn) {
       loginBtn.addEventListener('click', () => {
-        auth.signInWithPopup(provider).catch(err => console.error(err));
+        auth.signInWithPopup(provider).catch(err => {
+          console.error(err);
+          alert("লগইন ব্যর্থ হয়েছে!\n\nসমস্যা: " + err.message + "\n\n(অনুগ্রহ করে আপনার Firebase Console-এ Authentication > Sign-in method এ গিয়ে 'Google' অপশনটি Enable করুন।)");
+        });
       });
     }
 
