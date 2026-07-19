@@ -39,7 +39,7 @@ window.initiatePayment = function(planId, price) {
   'use strict';
 
   // ─── Auth State UI Logic ──────────────────────────────────
-  document.addEventListener('DOMContentLoaded', () => {
+  function initAuthUI() {
     const loginBtn = document.getElementById('user-login-btn');
     const profileBtn = document.getElementById('user-profile-btn');
     const profileImg = document.getElementById('user-profile-img');
@@ -68,7 +68,13 @@ window.initiatePayment = function(planId, price) {
         window.bipbooksIsPremium = false; // Reset premium status on logout
       }
     });
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAuthUI);
+  } else {
+    initAuthUI();
+  }
 
   // ─── Particle Canvas ─────────────────────────────────────
   (function initParticles() {
