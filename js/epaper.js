@@ -136,16 +136,7 @@
         showState('canvas');
         updateUI();
 
-        // Check Paywall Logic
-        if (pageNum > FREE_PAGE_LIMIT && !window.bipbooksIsPremium) {
-          canvas.classList.add('epaper-blurred');
-          if (paywallEl) paywallEl.style.display = 'flex';
-          if (overlayEl) overlayEl.style.pointerEvents = 'none'; // Disable click to flip
-        } else {
-          canvas.classList.remove('epaper-blurred');
-          if (paywallEl) paywallEl.style.display = 'none';
-          if (overlayEl) overlayEl.style.pointerEvents = 'auto'; // Enable click to flip
-        }
+
       }).catch(function(err) {
         if (err?.name !== 'RenderingCancelledException') console.error('Render:', err);
         isRendering = false;

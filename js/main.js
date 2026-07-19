@@ -13,25 +13,6 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 const provider = new firebase.auth.GoogleAuthProvider();
 
-// ─── Payment Gateway Placeholder ────────────────────────────
-window.initiatePayment = function(planId, price) {
-  if (!auth.currentUser) {
-    alert("পেমেন্ট করার আগে আপনাকে লগইন করতে হবে!");
-    const loginBtn = document.getElementById('user-login-btn');
-    if (loginBtn) loginBtn.click();
-    return;
-  }
-  
-  // Razorpay placeholder
-  alert(`Razorpay Payment Gateway Open...\n\nPlan: ${planId.toUpperCase()}\nAmount: ₹${price}\n\n(API keys needed to complete setup)`);
-  
-  // For demonstration: give premium access instantly
-  // Remove this when real Razorpay is integrated
-  if (confirm("For demo: Do you want to activate Premium now?")) {
-    window.bipbooksIsPremium = true;
-    alert("Premium activated! Please refresh the page if ePaper is blurred.");
-  }
-};
 
 (function() {
   'use strict';
@@ -74,7 +55,6 @@ window.initiatePayment = function(planId, price) {
       } else {
         if (loginBtn) loginBtn.style.display = 'block';
         if (profileBtn) profileBtn.style.display = 'none';
-        window.bipbooksIsPremium = false; // Reset premium status on logout
       }
     });
 
