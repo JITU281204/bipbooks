@@ -1,10 +1,74 @@
-/* ============================================================
-   BipBooks — Main JS
-   Navigation, Animations, Particles, Scroll Effects
-   ============================================================ */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
+// ─── Firebase Config ────────────────────────────────────────
+const firebaseConfig = {
+  apiKey: "AIzaSyC47j_zGeawZaI6gm0nE4EccIt4afrIIjE",
+  authDomain: "bipbooks.firebaseapp.com",
+  projectId: "bipbooks",
+  storageBucket: "bipbooks.firebasestorage.app",
+  messagingSenderId: "102356999864",
+  appId: "1:102356999864:web:16fa5845df6eaed245de4d"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+// ─── Payment Gateway Placeholder ────────────────────────────
+window.initiatePayment = function(planId, price) {
+  if (!auth.currentUser) {
+    alert("পেমেন্ট করার আগে আপনাকে লগইন করতে হবে!");
+    const loginBtn = document.getElementById('user-login-btn');
+    if (loginBtn) loginBtn.click();
+    return;
+  }
+  
+  // Razorpay placeholder
+  alert(`Razorpay Payment Gateway Open...\n\nPlan: ${planId.toUpperCase()}\nAmount: ₹${price}\n\n(API keys needed to complete setup)`);
+  
+  // For demonstration: give premium access instantly
+  // Remove this when real Razorpay is integrated
+  if (confirm("For demo: Do you want to activate Premium now?")) {
+    window.bipbooksIsPremium = true;
+    alert("Premium activated! Please refresh the page if ePaper is blurred.");
+  }
+};
 
 (function() {
   'use strict';
+
+  // ─── Auth State UI Logic ──────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    const loginBtn = document.getElementById('user-login-btn');
+    const profileBtn = document.getElementById('user-profile-btn');
+    const profileImg = document.getElementById('user-profile-img');
+    const logoutBtn = document.getElementById('user-logout-btn');
+
+    if (loginBtn) {
+      loginBtn.addEventListener('click', () => {
+        signInWithPopup(auth, provider).catch(err => console.error(err));
+      });
+    }
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', () => {
+        signOut(auth);
+      });
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        if (loginBtn) loginBtn.style.display = 'none';
+        if (profileBtn) profileBtn.style.display = 'flex';
+        if (profileImg) profileImg.src = user.photoURL || 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="%23ffd700"/></svg>';
+      } else {
+        if (loginBtn) loginBtn.style.display = 'block';
+        if (profileBtn) profileBtn.style.display = 'none';
+        window.bipbooksIsPremium = false; // Reset premium status on logout
+      }
+    });
+  });
 
   // ─── Particle Canvas ─────────────────────────────────────
   (function initParticles() {

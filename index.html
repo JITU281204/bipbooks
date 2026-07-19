@@ -40,6 +40,13 @@
         <span class="clock-time" id="clock-time">00:00:00</span>
         <span class="clock-date" id="clock-date">Jan 01, 2026</span>
       </div>
+      <button class="btn-login" id="user-login-btn">লগইন</button>
+      <div class="user-profile" id="user-profile-btn" style="display:none;">
+        <img src="" alt="Profile" id="user-profile-img">
+        <div class="user-dropdown">
+          <button id="user-logout-btn">লগআউট</button>
+        </div>
+      </div>
       <a href="#epaper-section" class="btn-epaper" id="btn-read-epaper">📰 ই-পেপার পড়ুন</a>
     </div>
 
@@ -233,6 +240,16 @@
               <div class="ep-click-half right" id="ep-right-zone" title="পরের পৃষ্ঠা">›</div>
             </div>
 
+            <!-- Paywall Overlay -->
+            <div class="epaper-paywall-overlay" id="epaper-paywall" style="display:none;">
+              <div class="epaper-paywall-content">
+                <div class="paywall-icon">🔒</div>
+                <h3 class="paywall-title">প্রিমিয়াম কন্টেন্ট</h3>
+                <p class="paywall-text">ম্যাগাজিনের বাকি অংশ পড়তে আপনার মেম্বারশিপ আপগ্রেড করুন।</p>
+                <a href="#membership" class="btn-upgrade" onclick="document.getElementById('epaper-paywall').style.display='none';">প্ল্যান দেখুন</a>
+              </div>
+            </div>
+
             <!-- Coming Soon state -->
             <div class="epaper-coming-soon" id="epaper-coming-soon" style="display:none;">
               <div class="coming-soon-icon">📅</div>
@@ -268,9 +285,67 @@
 
     <div class="section-sep"></div>
 
-    <!-- ═══════════════════════════════════════════════════
-         OUR BOOKS SECTION
-    ═══════════════════════════════════════════════════ -->
+  <!-- ─── MEMBERSHIP PRICING SECTION ─────────────────────── -->
+  <section id="membership" class="section membership-section">
+    <div class="container">
+      <div class="section-title">
+        <h2 class="glowing-text">প্রিমিয়াম মেম্বারশিপ</h2>
+        <p>যেকোনো একটি প্ল্যান বেছে নিন এবং সম্পূর্ণ ম্যাগাজিন পড়ার অ্যাক্সেস পান।</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Premium -->
+        <div class="pricing-card premium">
+          <div class="card-glow"></div>
+          <div class="pricing-header">
+            <h3>🥉 Premium</h3>
+            <div class="price">₹29<span>/মাস</span></div>
+          </div>
+          <ul class="pricing-features">
+            <li>✅ সম্পূর্ণ ই-পেপার অ্যাক্সেস</li>
+            <li>✅ অ্যাড-ফ্রি রিডিং</li>
+            <li>✅ এক্সক্লুসিভ আর্টিকেল</li>
+          </ul>
+          <button class="btn-buy" onclick="initiatePayment('premium', 29)">পেমেন্ট করুন</button>
+        </div>
+
+        <!-- Golden -->
+        <div class="pricing-card golden featured">
+          <div class="card-glow"></div>
+          <div class="pricing-badge">সবচেয়ে জনপ্রিয়</div>
+          <div class="pricing-header">
+            <h3>🥇 Golden</h3>
+            <div class="price">₹49<span>/মাস</span></div>
+          </div>
+          <ul class="pricing-features">
+            <li>✅ Premium এর সকল সুবিধা</li>
+            <li>✅ পুরনো আর্কাইভ অ্যাক্সেস</li>
+            <li>✅ পিডিএফ ডাউনলোড</li>
+          </ul>
+          <button class="btn-buy" onclick="initiatePayment('golden', 49)">পেমেন্ট করুন</button>
+        </div>
+
+        <!-- Diamond -->
+        <div class="pricing-card diamond">
+          <div class="card-glow"></div>
+          <div class="pricing-header">
+            <h3>💎 Diamond</h3>
+            <div class="price">₹99<span>/মাস</span></div>
+          </div>
+          <ul class="pricing-features">
+            <li>✅ Golden এর সকল সুবিধা</li>
+            <li>✅ ফ্রি প্রিন্টেড কপি (শর্ত প্রযোজ্য)</li>
+            <li>✅ বিশেষ ইভেন্টে আমন্ত্রণ</li>
+          </ul>
+          <button class="btn-buy" onclick="initiatePayment('diamond', 99)">পেমেন্ট করুন</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       OUR BOOKS SECTION
+       ════════════════════════════════════════════════════════ -->
     <section id="our-books" class="section" aria-label="Our books collection">
       <div class="section-inner">
         <div class="section-header reveal">
@@ -774,8 +849,8 @@
   </script>
   <script src="js/idb.js"></script>
   <script src="js/realtime.js"></script>
-  <script src="js/epaper.js"></script>
-  <script src="js/main.js"></script>
+  <script type="module" src="js/epaper.js"></script>
+  <script type="module" src="js/main.js"></script>
 
 
 </body>

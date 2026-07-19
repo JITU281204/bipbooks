@@ -17,16 +17,19 @@
   let scale       = 1.4;
   let isRendering = false;
   let renderTask  = null;
+  window.bipbooksIsPremium = false; // Global flag for premium status
 
   const MIN_SCALE  = 0.5;
   const MAX_SCALE  = 3.0;
   const SCALE_STEP = 0.2;
+  const FREE_PAGE_LIMIT = 3; // Pages allowed for free users
 
   // ─── DOM Refs ─────────────────────────────────────────────
   const canvas       = document.getElementById('epaper-canvas');
   const ctx          = canvas ? canvas.getContext('2d') : null;
   const loadingEl    = document.getElementById('epaper-loading');
   const overlayEl    = document.getElementById('ep-click-overlay');
+  const paywallEl    = document.getElementById('epaper-paywall');
   const noPdfEl      = document.getElementById('no-pdf-msg');
   const comingSoonEl = document.getElementById('epaper-coming-soon');
   const progressEl   = document.getElementById('ep-progress');
@@ -132,6 +135,17 @@
         isRendering = false; renderTask = null;
         showState('canvas');
         updateUI();
+
+        // Check Paywall Logic
+        if (pageNum > FREE_PAGE_LIMIT && !window.bipbooksIsPremium) {
+          canvas.classList.add('epaper-blurred');
+          if (paywallEl) paywallEl.style.display = 'flex';
+          if (overlayEl) overlayEl.style.pointerEvents = 'none'; // Disable click to flip
+        } else {
+          canvas.classList.remove('epaper-blurred');
+          if (paywallEl) paywallEl.style.display = 'none';
+          if (overlayEl) overlayEl.style.pointerEvents = 'auto'; // Enable click to flip
+        }
       }).catch(function(err) {
         if (err?.name !== 'RenderingCancelledException') console.error('Render:', err);
         isRendering = false;

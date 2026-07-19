@@ -1329,3 +1329,190 @@ footer::before {
   .stat-item { flex: 0 0 100%; }
   .footer-top { gap: 28px; }
 }
+
+
+/* ─── MEMBERSHIP PRICING SECTION ─── */
+.membership-section {
+  padding: 100px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.pricing-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 40px 30px;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.1);
+}
+
+.pricing-card.premium { border-top: 2px solid #cd7f32; }
+.pricing-card.golden { border-top: 2px solid #ffd700; transform: scale(1.05); }
+.pricing-card.golden:hover { transform: scale(1.05) translateY(-10px); }
+.pricing-card.diamond { border-top: 2px solid #00e5ff; }
+
+.pricing-badge {
+  position: absolute;
+  top: 16px;
+  right: -32px;
+  background: linear-gradient(135deg, #ffd700, #ffb800);
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 6px 40px;
+  transform: rotate(45deg);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+}
+
+.pricing-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.pricing-header .price {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 25px;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.pricing-header .price span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.pricing-features {
+  list-style: none;
+  margin-bottom: 30px;
+  flex-grow: 1;
+}
+
+.pricing-features li {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-buy {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pricing-card.premium .btn-buy:hover { background: #cd7f32; color: #000; }
+.pricing-card.golden .btn-buy { background: linear-gradient(135deg, #ffd700, #ffb800); color: #000; border: none; }
+.pricing-card.golden .btn-buy:hover { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+.pricing-card.diamond .btn-buy:hover { background: #00e5ff; color: #000; }
+
+.card-glow {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+/* User Auth Nav Styles */
+.btn-login {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-login:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.user-profile {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.user-profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #ffd700;
+}
+.user-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 10px;
+  display: none;
+  flex-direction: column;
+  min-width: 120px;
+  backdrop-filter: blur(10px);
+}
+.user-profile:hover .user-dropdown {
+  display: flex;
+}
+#user-logout-btn {
+  background: transparent;
+  border: none;
+  color: #ff4d4d;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px;
+  text-align: left;
+  border-radius: 8px;
+}
+#user-logout-btn:hover {
+  background: rgba(255, 77, 77, 0.1);
+}
+@media (max-width: 768px) {
+  .pricing-card.golden { transform: scale(1); }
+  .pricing-card.golden:hover { transform: scale(1) translateY(-5px); }
+  .btn-login { padding: 8px 16px; font-size: 0.9rem; }
+}
+
