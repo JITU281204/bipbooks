@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard - BipBooks</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <!-- Firebase Compat Libraries -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+</head>
+<body class="dashboard-body">
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>BipBooks</h2>
+        <span class="badge">User</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#overview" class="active" id="nav-overview">📊 ওভারভিউ</a>
+        <a href="#profile" id="nav-profile">👤 প্রোফাইল সেটিং</a>
+        <a href="index.html" class="back-home">🏠 হোমপেজে ফিরে যান</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="logout-btn" class="btn-danger">লগআউট</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="top-bar">
+        <h1>ড্যাশবোর্ড</h1>
+        <div class="user-info">
+          <img src="" alt="Profile" id="header-profile-img">
+          <span id="header-user-name">Loading...</span>
+        </div>
+      </header>
+
+      <!-- Overview Section -->
+      <section id="sec-overview" class="dashboard-section active">
+        <div class="stats-grid">
+          <div class="stat-card glowing-card">
+            <div class="stat-icon">📰</div>
+            <div class="stat-details">
+              <h3>ই-পেপার পড়েছেন</h3>
+              <p class="stat-number" id="stat-epapers-read">0</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📅</div>
+            <div class="stat-details">
+              <h3>মেম্বারশিপ স্ট্যাটাস</h3>
+              <p class="stat-number">ফ্রি</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="welcome-box">
+          <h2>স্বাগতম, <span id="welcome-name"></span>!</h2>
+          <p>আপনার প্রোফাইল সম্পূর্ণ করতে বামদিকের "প্রোফাইল সেটিং" মেনুতে ক্লিক করুন।</p>
+        </div>
+      </section>
+
+      <!-- Profile Settings Section -->
+      <section id="sec-profile" class="dashboard-section">
+        <div class="panel">
+          <h2>আপনার ব্যক্তিগত তথ্য</h2>
+          <form id="profile-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="p-name">নাম</label>
+                <input type="text" id="p-name" required>
+              </div>
+              <div class="form-group">
+                <label for="p-mobile">মোবাইল নম্বর</label>
+                <input type="tel" id="p-mobile" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="p-country">দেশ</label>
+                <input type="text" id="p-country" required>
+              </div>
+              <div class="form-group">
+                <label for="p-state">রাজ্য</label>
+                <input type="text" id="p-state" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="p-district">জেলা</label>
+              <input type="text" id="p-district" required>
+            </div>
+            <button type="submit" class="btn-primary" id="p-save-btn">তথ্য সেভ করুন</button>
+          </form>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="dashboard-toast" class="toast">
+    <span id="toast-msg"></span>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

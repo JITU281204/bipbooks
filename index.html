@@ -44,7 +44,7 @@
       <div class="user-profile" id="user-profile-btn" style="display:none;">
         <img src="" alt="Profile" id="user-profile-img">
         <div class="user-dropdown">
-          <button id="user-dashboard-btn">ড্যাশবোর্ড</button>
+          <a href="dashboard.html" id="user-dashboard-link" class="dropdown-link">ড্যাশবোর্ড</a>
           <button id="user-logout-btn">লগআউট</button>
         </div>
       </div>
@@ -777,32 +777,7 @@
     <span id="toast-msg"></span>
   </div>
 
-  <!-- User Dashboard Modal -->
-  <div class="dashboard-modal-overlay" id="dashboard-modal" style="display:none;">
-    <div class="dashboard-modal-content">
-      <button class="close-dashboard" id="close-dashboard-btn">&times;</button>
-      <h2>আমার প্রোফাইল</h2>
-      <p>আপনার তথ্য আপডেট করুন</p>
-      <form id="user-dashboard-form">
-        <div class="form-group">
-          <label for="ud-name">নাম</label>
-          <input type="text" id="ud-name" placeholder="আপনার নাম" required>
-        </div>
-        <div class="form-group">
-          <label for="ud-mobile">মোবাইল নম্বর</label>
-          <input type="tel" id="ud-mobile" placeholder="আপনার মোবাইল নম্বর" required>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="ud-country">দেশ</label>
-            <input type="text" id="ud-country" placeholder="দেশ" required>
-          </div>
-          <div class="form-group">
-            <label for="ud-state">রাজ্য</label>
-            <input type="text" id="ud-state" placeholder="রাজ্য" required>
-          </div>
-        </div>
-        <div class="form-group">
+  <div class="form-group">
           <label for="ud-district">জেলা</label>
           <input type="text" id="ud-district" placeholder="জেলা" required>
         </div>

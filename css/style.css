@@ -1476,6 +1476,23 @@ footer::before {
   border-color: #ffd700;
 }
 
+.user-dropdown button, .user-dropdown a.dropdown-link {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  display: block;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 14px;
+}
+.user-dropdown button:hover, .user-dropdown a.dropdown-link:hover {
+  background: rgba(255,255,255,0.1);
+}
+
 .btn-save {
   width: 100%;
   padding: 12px;

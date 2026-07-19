@@ -23,11 +23,7 @@ const provider = new firebase.auth.GoogleAuthProvider();
     const profileBtn = document.getElementById('user-profile-btn');
     const profileImg = document.getElementById('user-profile-img');
     const logoutBtn = document.getElementById('user-logout-btn');
-    const dashboardBtn = document.getElementById('user-dashboard-btn');
-    const dashboardModal = document.getElementById('dashboard-modal');
-    const closeDashboardBtn = document.getElementById('close-dashboard-btn');
-    const dashboardForm = document.getElementById('user-dashboard-form');
-    const saveBtn = document.getElementById('ud-save-btn');
+    
 
     // Authentication Listeners
     if (loginBtn) {
@@ -42,7 +38,7 @@ const provider = new firebase.auth.GoogleAuthProvider();
     if (logoutBtn) {
       logoutBtn.addEventListener('click', () => {
         auth.signOut();
-        if (dashboardModal) dashboardModal.style.display = 'none';
+        
       });
     }
 
@@ -58,70 +54,7 @@ const provider = new firebase.auth.GoogleAuthProvider();
       }
     });
 
-    // Dashboard Modal Listeners
-    if (dashboardBtn && dashboardModal) {
-      dashboardBtn.addEventListener('click', async () => {
-        dashboardModal.style.display = 'flex';
-        const user = auth.currentUser;
-        if (user) {
-          try {
-            const docRef = db.collection('users').doc(user.uid);
-            const docSnap = await docRef.get();
-            if (docSnap.exists) {
-              const data = docSnap.data();
-              document.getElementById('ud-name').value = data.name || user.displayName || '';
-              document.getElementById('ud-mobile').value = data.mobile || '';
-              document.getElementById('ud-country').value = data.country || '';
-              document.getElementById('ud-state').value = data.state || '';
-              document.getElementById('ud-district').value = data.district || '';
-            } else {
-              document.getElementById('ud-name').value = user.displayName || '';
-            }
-          } catch (e) {
-            console.error("Error fetching user data:", e);
-          }
-        }
-      });
     }
-
-    if (closeDashboardBtn && dashboardModal) {
-      closeDashboardBtn.addEventListener('click', () => {
-        dashboardModal.style.display = 'none';
-      });
-    }
-
-    if (dashboardForm) {
-      dashboardForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const user = auth.currentUser;
-        if (!user) return;
-
-        const data = {
-          name: document.getElementById('ud-name').value,
-          mobile: document.getElementById('ud-mobile').value,
-          country: document.getElementById('ud-country').value,
-          state: document.getElementById('ud-state').value,
-          district: document.getElementById('ud-district').value,
-          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        };
-
-        saveBtn.disabled = true;
-        saveBtn.innerText = "সংরক্ষণ করা হচ্ছে...";
-
-        try {
-          await db.collection('users').doc(user.uid).set(data, { merge: true });
-          dashboardModal.style.display = 'none';
-          if (window.showToast) window.showToast('✅ প্রোফাইল সফলভাবে আপডেট হয়েছে!', '#00e676');
-        } catch (err) {
-          console.error("Error updating profile: ", err);
-          alert("প্রোফাইল আপডেট করতে সমস্যা হয়েছে: " + err.message);
-        } finally {
-          saveBtn.disabled = false;
-          saveBtn.innerText = "সেভ করুন";
-        }
-      });
-    }
-  }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initAuthUI);
