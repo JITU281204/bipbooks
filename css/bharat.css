@@ -177,11 +177,8 @@ body.bharat-theme #user-dashboard-link {
 body.bharat-theme .btn-epaper {
   display: none !important;
 }
-body.bharat-theme .ticker-wrap,
-body.bharat-theme .ticker-bar,
 body.bharat-theme .banner,
-body.bharat-theme .our-books,
-body.bharat-theme .page-wrapper {
+body.bharat-theme .our-books {
   display: none !important;
 }
 
