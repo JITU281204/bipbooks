@@ -1330,7 +1330,6 @@ footer::before {
   .footer-top { gap: 28px; }
 }
 
-
 /* ─── MEMBERSHIP PRICING SECTION ─── */
 .membership-section {
   padding: 100px 20px;
@@ -1515,4 +1514,3 @@ footer::before {
   .pricing-card.golden:hover { transform: scale(1) translateY(-5px); }
   .btn-login { padding: 8px 16px; font-size: 0.9rem; }
 }
-
