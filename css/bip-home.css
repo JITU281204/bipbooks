@@ -1,0 +1,228 @@
+/* ==============================================
+   BHARAT INTERNATIONAL PUBLICATION - HOME SECTIONS
+   ============================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap');
+
+/* 1. Publisher Banner */
+.bip-pub-banner {
+  background: linear-gradient(135deg, #1a237e 0%, #0d47a1 60%, #1565c0 100%);
+  color: #fff;
+  text-align: center;
+  padding: 60px 5% 50px;
+}
+.bip-pub-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  color: #ff6f00;
+  margin: 0 0 12px;
+  letter-spacing: 1px;
+}
+.bip-pub-tagline {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 500;
+  color: #fff;
+  margin: 0 0 8px;
+}
+.bip-pub-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+  color: rgba(255,255,255,0.75);
+  margin: 0;
+  font-style: italic;
+}
+
+/* 2. Quotes Hero */
+.bip-quotes-hero {
+  position: relative;
+  background: url('../assets/quotes_bg.png') center/cover no-repeat;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.bip-quotes-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.62);
+}
+.bip-quotes-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 60px 8%;
+  max-width: 900px;
+}
+.bip-quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 0 0 30px;
+  opacity: 0;
+  animation: bip-fadein 1s ease forwards;
+}
+.bip-quote.en {
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  color: #fff;
+  animation-delay: 0.2s;
+}
+.bip-quote.bn {
+  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+  color: #ffd740;
+  font-family: 'Noto Sans Bengali', 'Playfair Display', serif;
+  animation-delay: 0.5s;
+}
+.bip-quote.hi {
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  color: #ffe0b2;
+  animation-delay: 0.8s;
+}
+@keyframes bip-fadein {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 3. Empowering Authors Dreams */
+.bip-empowering {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding: 90px 8%;
+  background: #fff;
+}
+.bip-empowering-text {
+  flex: 1;
+}
+.bip-empowering-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: #1a1a2e;
+  line-height: 1.15;
+  margin: 0 0 20px;
+  position: relative;
+}
+.bip-empowering-text h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #ff6f00;
+  margin-top: 18px;
+}
+.bip-empowering-text p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  color: #555;
+  line-height: 1.7;
+  margin: 0 0 32px;
+}
+.bip-btn-explore {
+  display: inline-block;
+  padding: 13px 36px;
+  border: 2px solid #1a1a2e;
+  background: transparent;
+  color: #1a1a2e;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.35s ease;
+}
+.bip-btn-explore:hover {
+  background: #1a1a2e;
+  color: #fff;
+}
+.bip-empowering-imgs {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.bip-empowering-imgs img {
+  width: calc(50% - 10px);
+  border-radius: 10px;
+  object-fit: cover;
+  height: 340px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  transition: transform 0.4s ease;
+}
+.bip-empowering-imgs img:nth-child(2) {
+  margin-top: 35px;
+}
+.bip-empowering-imgs img:hover {
+  transform: translateY(-8px);
+}
+
+/* 4. Global Connection */
+.bip-global {
+  text-align: center;
+  padding: 90px 5%;
+  background: #fafafa;
+  border-top: 1px solid #eee;
+}
+.bip-global-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #1a1a2e;
+  margin: 0 0 16px;
+  font-weight: 700;
+}
+.bip-global-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 0 0 55px;
+}
+.bip-global-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.bip-global-grid img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: all 0.45s ease;
+  filter: brightness(0.9);
+}
+.bip-global-grid img:hover {
+  filter: brightness(1.05);
+  transform: scale(1.03);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .bip-empowering {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+  .bip-empowering-text h2::after {
+    margin: 18px auto 0;
+  }
+  .bip-empowering-imgs {
+    width: 100%;
+  }
+  .bip-global-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .bip-global-grid {
+    grid-template-columns: 1fr;
+  }
+  .bip-pub-name { font-size: 1.8rem; }
+  .bip-quote.en { font-size: 1.3rem; }
+}
