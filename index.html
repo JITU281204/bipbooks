@@ -11,9 +11,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/bharat.css" />
   <link rel="stylesheet" href="css/epaper.css" />
 </head>
-<body>
+<body class="bharat-theme">
   <!-- Particle Background -->
   <canvas id="particle-canvas"></canvas>
 
@@ -55,6 +56,112 @@
       <span></span><span></span><span></span>
     </button>
   </nav>
+
+  <!-- ==============================================
+       NEW BHARAT INTERNATIONAL PUBLICATION SECTIONS
+       ============================================== -->
+  
+  <section class="publisher-banner" id="home">
+    <img src="assets/quotes_bg.png" style="display:none;" alt="preload">
+    <h1>Bharat International Publication</h1>
+    <p>A Traditional Independent Publishing House</p>
+    <p style="font-size: 1.2rem; margin-top:10px;">We don't cater Self-publication</p>
+  </section>
+
+  <section class="quote-hero">
+    <div class="quote-hero-content">
+      <h2>"Unleashing Stories, Bridging Cultures"</h2>
+      <h3>"শব্দের সুরে, সংস্কৃতির সেতু"</h3>
+      <h2>"जहां मिलती हैं कहानियां और संस्कृतियां"</h2>
+    </div>
+  </section>
+
+  <section class="empowering-section">
+    <div class="empowering-text">
+      <h2>Empowering Authors Dreams</h2>
+      <p>Connecting authors with global readers, fostering multi-cultural assimilation through literature.</p>
+      <button class="btn-outline">Explore</button>
+    </div>
+    <div class="empowering-images">
+      <img src="assets/typewriter.png" alt="Typewriter">
+      <img src="assets/globe.png" alt="Globe">
+    </div>
+  </section>
+
+  <section class="global-section">
+    <h2>Global Connection</h2>
+    <p>Fostering multi-cultural assimilation through literature, connecting authors with global readers.</p>
+    <div class="global-grid">
+      <img src="assets/grid_aarti.png" alt="Aarti">
+      <img src="assets/grid_reading.png" alt="Reading">
+      <img src="assets/grid_laughing.png" alt="Laughing">
+      <img src="assets/grid_sanskrit.png" alt="Sanskrit text">
+    </div>
+  </section>
+
+  <section class="manuscript-section">
+    <div class="manuscript-form-container">
+      <p class="subtitle">Connecting authors with global readers to bridge diverse cultures through the power of words</p>
+      <form id="bharat-form">
+        <div class="m-form-group">
+          <label>Name</label>
+          <input type="text" placeholder="Full Name" required>
+        </div>
+        <div class="m-form-group">
+          <label>Country*</label>
+          <input type="text" placeholder="Country of origin" required>
+        </div>
+        <div class="m-form-group">
+          <label>E-mail</label>
+          <input type="email" placeholder="Write your E-mail id for correspondence" required>
+        </div>
+        <div class="m-form-group">
+          <label>Phone number*</label>
+          <input type="tel" placeholder="Your phone number" required>
+        </div>
+        <div class="m-form-group">
+          <label>Let us know your idea*</label>
+          <textarea placeholder="Write us about the concept of your manuscript" required></textarea>
+        </div>
+        <div class="m-form-group">
+          <label>Language you prefer for your book*</label>
+          <div class="radio-group">
+            <label><input type="radio" name="lang" value="English"> English</label>
+            <label><input type="radio" name="lang" value="Bengali"> Bengali</label>
+            <label><input type="radio" name="lang" value="Hindi"> Hindi</label>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit-m">Submit your form here</button>
+      </form>
+    </div>
+    <div class="manuscript-image">
+      <img src="assets/wordcloud.png" alt="Word Cloud Bharat">
+    </div>
+  </section>
+
+  <footer class="bharat-footer">
+    <h2>NATIONALITY-QUALITY-HONESTY-HARMONY</h2>
+    <p class="sub">Connecting authors with global readers through diverse cultures.</p>
+    <div class="footer-bottom-grid">
+      <div class="social-links">
+        <h4>SOCIAL CONNECTIVITY</h4>
+        <div class="social-icons">
+          <span>fb</span> <span>ig</span> <span>x</span>
+        </div>
+      </div>
+      <div class="contact-info">
+        <h4>WANT TO HEAR FROM YOU</h4>
+        <p>+91-9624799478</p>
+        <p>editor@bipbooks.com</p>
+        <p>info@bipbooks.com</p>
+        <p>bipbookspub@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <span>© 2024. All rights reserved to Bharat International Publication</span>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </footer>
 
   <!-- Mobile Nav -->
   <div class="nav-mobile" id="nav-mobile" role="dialog" aria-label="Mobile navigation">

@@ -1,0 +1,346 @@
+/* Bharat International Publication Custom Styles */
+
+:root {
+  --bip-blue: #1c277e; /* The primary dark blue */
+  --bip-blue-hover: #141c59;
+  --bip-font: 'Outfit', 'Tiro Bangla', sans-serif;
+}
+
+body.bharat-theme {
+  font-family: var(--bip-font);
+  background-color: #f5f5f5; /* Light background for new theme */
+  color: #333;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Overriding index Navbar */
+body.bharat-theme .navbar {
+  background: var(--bip-blue) !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  padding: 15px 30px;
+}
+body.bharat-theme .nav-links a {
+  color: #fff;
+}
+body.bharat-theme .nav-links a:hover,
+body.bharat-theme .nav-links a.active {
+  color: #ffd700; /* Keeps some gold accent */
+}
+body.bharat-theme .logo-img {
+  background: white;
+  padding: 5px;
+  border-radius: 8px;
+}
+body.bharat-theme .logo-text {
+  color: #fff;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+body.bharat-theme .logo-subtext {
+  color: #a0c4ff;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+/* 1. Publisher Banner */
+.publisher-banner {
+  background-color: var(--bip-blue);
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+}
+.publisher-banner h1 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  font-weight: 400;
+}
+.publisher-banner p {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #e0e0e0;
+}
+
+/* 2. Quote Hero Section */
+.quote-hero {
+  background: url('../assets/quotes_bg.png') center/cover no-repeat;
+  text-align: center;
+  padding: 80px 20px;
+  color: white;
+  position: relative;
+}
+.quote-hero::before {
+  content: '';
+  position: absolute;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(30, 60, 40, 0.6); /* greenish tint */
+}
+.quote-hero-content {
+  position: relative;
+  z-index: 1;
+}
+.quote-hero h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.quote-hero h3 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+/* 3. Empowering Section */
+.empowering-section {
+  display: flex;
+  align-items: center;
+  padding: 80px 5%;
+  background: white;
+  gap: 40px;
+}
+.empowering-text {
+  flex: 1;
+}
+.empowering-text h2 {
+  font-size: 3.5rem;
+  color: #111;
+  margin-bottom: 20px;
+  line-height: 1.1;
+}
+.empowering-text p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+.btn-outline {
+  padding: 12px 30px;
+  border: 1px solid #333;
+  background: transparent;
+  color: #333;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-outline:hover {
+  background: #333;
+  color: white;
+}
+.empowering-images {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+}
+.empowering-images img {
+  width: 50%;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+/* 4. Global Connection Grid */
+.global-section {
+  text-align: center;
+  padding: 80px 5%;
+  background: #fff;
+}
+.global-section h2 {
+  font-size: 3rem;
+  color: #111;
+  margin-bottom: 10px;
+}
+.global-section p {
+  color: #666;
+  margin-bottom: 40px;
+}
+.global-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.global-grid img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* 5. Manuscript Form Section */
+.manuscript-section {
+  display: flex;
+  padding: 80px 5%;
+  background: url('../assets/quotes_bg.png') center/cover no-repeat;
+  color: white;
+  gap: 40px;
+  position: relative;
+  align-items: stretch;
+}
+.manuscript-section::before {
+  content: '';
+  position: absolute;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(20, 30, 40, 0.7);
+}
+.manuscript-form-container {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 20px;
+  position: relative;
+  z-index: 1;
+}
+.manuscript-form-container p.subtitle {
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+.m-form-group {
+  margin-bottom: 20px;
+}
+.m-form-group label {
+  display: block;
+  margin-bottom: 8px;
+}
+.m-form-group input, .m-form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-family: inherit;
+}
+.m-form-group textarea {
+  height: 100px;
+  resize: vertical;
+}
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 300;
+}
+.btn-submit-m {
+  background: rgba(255,255,255,0.2);
+  color: white;
+  border: 1px solid white;
+  padding: 12px 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+.btn-submit-m:hover {
+  background: white;
+  color: #333;
+}
+.manuscript-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+.manuscript-image img {
+  width: 100%;
+  border-radius: 20px;
+  background: white;
+  padding: 20px;
+}
+
+/* 6. New Footer */
+.bharat-footer {
+  background: var(--bip-blue);
+  color: white;
+  padding: 60px 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.bharat-footer h2 {
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.bharat-footer p.sub {
+  font-style: italic;
+  margin-bottom: 40px;
+  color: #d0d0d0;
+}
+.footer-bottom-grid {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: flex-end;
+}
+.social-links {
+  text-align: left;
+}
+.social-links h4 {
+  margin-bottom: 20px;
+}
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+.social-icons span {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.contact-info {
+  text-align: right;
+}
+.contact-info h4 {
+  margin-bottom: 20px;
+}
+.contact-info p {
+  margin: 5px 0;
+  color: #e0e0e0;
+}
+.footer-copy {
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #aaa;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.footer-copy a {
+  color: #aaa;
+  text-decoration: none;
+}
+
+/* Hide old sections */
+body.bharat-theme .hero,
+body.bharat-theme footer:not(.bharat-footer) {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .empowering-section {
+    flex-direction: column;
+  }
+  .global-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .manuscript-section {
+    flex-direction: column;
+  }
+  .footer-bottom-grid {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    text-align: center;
+  }
+  .social-links, .contact-info {
+    text-align: center;
+  }
+}
