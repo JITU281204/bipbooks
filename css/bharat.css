@@ -178,7 +178,8 @@ body.bharat-theme .btn-epaper {
   display: none !important;
 }
 body.bharat-theme .banner,
-body.bharat-theme .our-books {
+body.bharat-theme .our-books,
+body.bharat-theme #epaper-section {
   display: none !important;
 }
 
