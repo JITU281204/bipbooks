@@ -131,7 +131,38 @@ body.bharat-theme .nav-links a.active {
   box-shadow: none !important;
   border-bottom: 2px solid var(--bip-gold);
 }
-body.bharat-theme .btn-login,
+/* Fix navbar overflow so Login doesn't get clipped */
+body.bharat-theme .navbar {
+  overflow: visible !important;
+  border-radius: 0 !important;
+}
+body.bharat-theme .nav-actions {
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+/* Premium Login Button */
+body.bharat-theme .btn-login {
+  background: transparent !important;
+  border: 1px solid var(--bip-gold) !important;
+  color: var(--bip-gold) !important;
+  padding: 8px 20px !important;
+  border-radius: 20px !important;
+  font-family: var(--font-sans) !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  transition: all 0.3s ease !important;
+  white-space: nowrap !important;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.15) !important;
+  cursor: pointer;
+}
+body.bharat-theme .btn-login:hover {
+  background: var(--bip-gold) !important;
+  color: var(--bip-royal-dark) !important;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4) !important;
+}
 body.bharat-theme .btn-logout,
 body.bharat-theme #user-dashboard-link {
   font-family: var(--font-sans);
