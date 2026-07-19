@@ -175,12 +175,36 @@ body.bharat-theme #user-dashboard-link {
   font-family: var(--font-sans);
 }
 body.bharat-theme .btn-epaper {
-  display: none !important; /* Hiding the huge yellow button for premium look */
+  display: none !important;
 }
 body.bharat-theme .ticker-wrap,
+body.bharat-theme .ticker-bar,
 body.bharat-theme .banner,
-body.bharat-theme .our-books {
-  display: none !important; /* Hiding old non-premium sections */
+body.bharat-theme .our-books,
+body.bharat-theme .page-wrapper {
+  display: none !important;
+}
+
+/* Social Icon Links */
+.social-icon-link {
+  color: var(--bip-text-muted);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(212,175,55,0.2);
+  background: rgba(212,175,55,0.05);
+  transition: all 0.35s ease;
+  text-decoration: none;
+}
+.social-icon-link:hover {
+  color: var(--bip-gold);
+  border-color: var(--bip-gold);
+  background: rgba(212,175,55,0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(212,175,55,0.2);
 }
 
 /* 1. Publisher Banner */
